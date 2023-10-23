@@ -19,17 +19,44 @@ let person3 = {
     }]
 }
 
-const favoriteFoods = (food) => {
-     if (food){
-        console.log("my favorite" + (food) + "is" + (dish) )
-     }
-     if (dish == []){ 
-        for i in []: 
-        console.log("my favorite" + (food) + " is " + (dish) )
-    
-     }
+
+function displayFavDishes(person){
+    for (let key in person) {
+        console.log(`${key}:`);
+        if (Array.isArray(person[key])) {
+            person[key].forEach((dish,index) => {
+                console.log(` ${index + 1}. ${dish}`);
+            });
+        } else if (typeof person[key] === "object"){
+            for (let resturant in person[key][0]){
+                console.log(` ${resturant}: ${person[key][0][resturant]}`);
+            }
+          
+        }
+        else {
+            console.log(` ${person[key]}`)
+        }
     }
-console.log(favoriteFoods(pizza))
+}
+
+console.log(displayFavDishes(person3))
+//const favoriteFoods = (food) => {
+//     if (food){
+//        console.log("my favorite" + (food) + "is" + (dish) )
+//     }
+//     for (i in dish){
+//     if (dish == []){ 
+//        console.log("my favorite" + (food) + " is " + (dish) )
+    
+//     }
+
+//     if(dish == {}){
+//        console.log("my favorite" + (food)+ "at" + Object.keys(resturant) + " is " + Object.values(flavor))
+//     }
+    
+//    }
+//    }
+//console.log(favoriteFoods(pizza))
 
 
 
@@ -50,30 +77,49 @@ age by 3 years. Use an arrow function for both methods
 // Use an arrow to create the printInfo method
 
 // Create another arrow function for the addAge method that takes a single parameter
-// Adding to the age 
-
-
-const Person =  (name,age) => {
-    this.name = name; 
+// Adding to the age
+function Person(name, age) {
+    this.name = name;
     this.age = age;
 }
-Person.prototype.addAge = (age) => {
-    age +3;
+
+Person.prototype.printInfo = function() {
+    console.log( `Name : ${this.name}, Age: ${this.age}`);
 };
 
-Person.prototype.printInfo = printInfo = () => {
-console.log(this.name + " is " + this.age + " years old.")
-};
-Person.prototype.changeName = function changeName(newName){
-this.name = newName
-};
+Person.prototype.addAge = function (years) {
+    this.age += years;
+}
 
+const person1 = new Person("Jaqueline", 26)
+const person2 = new Person ("Dan", 34)
 
+person1.printInfo()
+person2.printInfo()
 
+person1.addAge(3)
 
-var person1 = new Person ('Jaqueline', 28)
-var person2 = new Person('Dan', 34)
-Jaqueline.printInfo()
+ 
+person1.printInfo()
+person2.printInfo()
+
+//const Person =  (name,age) => {
+  //  this.name = name; 
+   // this.age = age;
+//}
+//Person.prototype.addAge = (age) => {
+  //  age +3;
+//};
+
+//Person.prototype.printInfo = printInfo = () => {
+//console.log(this.name + " is " + this.age + " years old.")
+//};
+//Person.prototype.changeName = function changeName(newName){
+//this.name = newName
+//};
+//var person1 = new Person ('Jaqueline', 28)
+//var person2 = new Person('Dan', 34)
+//Jaqueline.printInfo()
 
 // =============Exercise #3 ============//
 /*
@@ -85,14 +131,31 @@ Jaqueline.printInfo()
 
 // Promises
 
-const Length = () => {
-    return new Promise((word)=> {
-        if (word.length(10+word)){
-                console.log('Big word')
-            }
-        if (word.length(10 - word )){
-            console.log('Small Number')
-        }
-    })}
 
-console.log(Length('Hi'))
+
+function checkLength(string) {
+    return new Promise((resolve, reject) => {
+      // Check if the length of the string is greater than 10
+      if (string.length > 10) {
+        // If the length is greater than 10, resolve the Promise with the message "Big word"
+        resolve("Big word");
+      } else {
+        // If the length is less than or equal to 10, reject the Promise with the message "Small Number"
+        reject("Small Number");
+      }
+    });
+  }
+
+  console.log(checkLength("Hi"))
+
+//const Length = () => {
+  //  return new Promise((word)=> {
+    //    if (word.length(10+word)){
+      //          console.log('Big word')
+        //    }
+        //if (word.length(10 - word )){
+        //    console.log('Small Number')
+       // }
+   // })}
+
+//console.log(Length('Hi'))
